@@ -1,7 +1,7 @@
 use std::time::Instant;
 
 fn main() {
-    const UPPER_BOUND: i32 = 1_000_000;
+    const UPPER_BOUND: i32 = 100_000_000;
     let mut counter = 1;
     let mut current = 1;
     let mut local_bound: f64;
