@@ -1,4 +1,3 @@
-use std::thread;
 use std::time::Instant;
 
 const UPPER_BOUND: usize = 10_000;
