@@ -1,10 +1,15 @@
-use std::thread;
-use std::time::Instant;
+use std::{sync::mpsc, thread, time::Instant};
 
 const UPPER_BOUND: usize = 10_000;
 const LOWER_BOUND: usize = 2;
 
+const NUM_THREADS: usize = 2;
+
 fn main() {
+    let (tx, rx) = mpsc::channel();
+    let senders = [];
+    for i in 0..NUM_THREADS {}
+
     let start = Instant::now();
 
     let primes = UPPER_BOUND
@@ -47,6 +52,5 @@ fn find_composites(range: &Range) -> usize {
             test += 1;
         }
     }
-
     composites
 }
