@@ -6,11 +6,9 @@ const LOWER_BOUND: usize = 2;
 const NUM_THREADS: usize = 2;
 
 fn main() {
-    let (tx, rx) = mpsc::channel();
-    let senders = [];
-    for i in 0..NUM_THREADS {}
+    let (tx, rx) = mpsc::channel::<usize>();
 
-    let start = Instant::now();
+    let time = Instant::now();
 
     let primes = UPPER_BOUND
         - find_composites(&Range {
@@ -18,7 +16,7 @@ fn main() {
             upper: UPPER_BOUND,
         });
 
-    let duration = start.elapsed();
+    let duration = time.elapsed();
 
     println!(
         "There are {} prime numbers between {} and {}",
