@@ -1,3 +1,5 @@
+use terminal_chess::*;
+
 fn main() {
-    println!("Hello, world!");
+    println!("{}", empty_board());
 }
