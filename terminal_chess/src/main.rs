@@ -1,5 +1,5 @@
 use terminal_chess::*;
 
 fn main() {
-    println!("{}", empty_board());
+    println!("{}", ascii_board());
 }
