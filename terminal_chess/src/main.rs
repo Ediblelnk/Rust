@@ -1,5 +1,5 @@
 use terminal_chess::*;
 
 fn main() {
-    println!("{}", sample_board());
+    print_piece(BLACK, BLACK, KING)
 }
