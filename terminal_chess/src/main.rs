@@ -3,7 +3,7 @@ use terminal_chess::*;
 fn main() {
     // print_piece(BLACK, K);
 
-    let chess = Chess::new([
+    let mut chess = Chess::new([
         [r, n, b, q, k, b, n, r],
         [p, p, p, p, p, p, p, p],
         [E, E, E, E, E, E, E, E],
@@ -16,5 +16,7 @@ fn main() {
 
     chess.print_board();
 
-    chess.move_piece("a2a4");
+    let _ = chess.move_piece("b8c6");
+
+    chess.print_board();
 }

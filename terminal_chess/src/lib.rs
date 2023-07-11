@@ -57,13 +57,54 @@ impl Chess {
         Self { board }
     }
 
-    pub fn move_piece(&self, input: &str) /*-> Result<Self, io::Error> */
-    {
-        let turn = input
+    pub fn move_piece(&mut self, input: &str) -> Result<bool, String> {
+        let coords = match self.coordinate_input(&input) {
+            Ok(vec) => vec,
+            Err(err) => return Err(err),
+        };
+
+        let piece = self.board[8-*coords.get(1).unwrap()][*coords.get(0).unwrap()-1];
+
+        println!("{piece}");
+
+        self.board[8-*coords.get(3).unwrap()][*coords.get(2).unwrap()-1] = piece;
+        self.board[8-*coords.get(1).unwrap()][*coords.get(0).unwrap()-1] = E;
+
+        println!("{:?}", coords);
+        println!("{:?}", self.board);
+
+        Ok(true)
+    }
+
+    fn coordinate_input(&self, input: &str) -> Result<Vec<usize>, String> {
+        match input.len() {
+            x if x > 4 => return Err("too many inputs".to_string()),
+            x if x < 4 => return Err("too few inputs".to_string()),
+            _ => (),
+        };
+
+        let rough_coords = input
             .split("")
             .filter(|x| !x.is_empty())
-            .collect::<Vec<&str>>();
-        print!("{:?}", turn);
+            .map(|x| match x.to_lowercase().as_str() {
+                "a" => "1",
+                "b" => "2",
+                "c" => "3",
+                "d" => "4",
+                "e" => "5",
+                "f" => "6",
+                "g" => "7",
+                "h" => "8",
+                _ => x,
+            })
+            .map(|x| x.parse::<usize>());
+        // .collect::<Vec<usize>>();
+
+        if rough_coords.clone().any(|x| x.is_err()) {
+            return Err("improper format.".to_string());
+        }
+
+        Ok(rough_coords.map(|x| x.unwrap()).collect::<Vec<usize>>())
     }
 
     pub fn print_board(&self) {
