@@ -16,7 +16,7 @@ fn main() {
 
     chess.print_board();
 
-    let _ = chess.move_piece("bxc6");
+    let _ = chess.move_piece("b8c6");
 
     chess.print_board();
 }
