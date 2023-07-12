@@ -1,7 +1,5 @@
 #![allow(non_upper_case_globals)]
 
-use std::io;
-
 pub fn is_white(rank: usize, file: usize) -> usize {
     (rank + file) % 2
 }
@@ -57,18 +55,33 @@ impl Chess {
         Self { board }
     }
 
+    pub fn new_game() -> Self {
+        Self {
+            board: [
+                [r, n, b, q, k, b, n, r],
+                [p, p, p, p, p, p, p, p],
+                [E, E, E, E, E, E, E, E],
+                [E, E, E, E, E, E, E, E],
+                [E, E, E, E, E, E, E, E],
+                [E, E, E, E, E, E, E, E],
+                [P, P, P, P, P, P, P, P],
+                [R, N, B, Q, K, B, N, R],
+            ],
+        }
+    }
+
     pub fn move_piece(&mut self, input: &str) -> Result<bool, String> {
         let coords = match self.coordinate_input(&input) {
             Ok(vec) => vec,
             Err(err) => return Err(err),
         };
 
-        let piece = self.board[8-*coords.get(1).unwrap()][*coords.get(0).unwrap()-1];
+        let piece = self.board[8 - *coords.get(1).unwrap()][*coords.get(0).unwrap() - 1];
 
         println!("{piece}");
 
-        self.board[8-*coords.get(3).unwrap()][*coords.get(2).unwrap()-1] = piece;
-        self.board[8-*coords.get(1).unwrap()][*coords.get(0).unwrap()-1] = E;
+        self.board[8 - *coords.get(3).unwrap()][*coords.get(2).unwrap() - 1] = piece;
+        self.board[8 - *coords.get(1).unwrap()][*coords.get(0).unwrap() - 1] = E;
 
         println!("{:?}", coords);
         println!("{:?}", self.board);
@@ -77,6 +90,7 @@ impl Chess {
     }
 
     fn coordinate_input(&self, input: &str) -> Result<Vec<usize>, String> {
+        println!("Your input: '{input}'");
         match input.len() {
             x if x > 4 => return Err("too many inputs".to_string()),
             x if x < 4 => return Err("too few inputs".to_string()),

@@ -1,22 +1,23 @@
+use std::io;
 use terminal_chess::*;
 
 fn main() {
     // print_piece(BLACK, K);
 
-    let mut chess = Chess::new([
-        [r, n, b, q, k, b, n, r],
-        [p, p, p, p, p, p, p, p],
-        [E, E, E, E, E, E, E, E],
-        [E, E, E, E, E, E, E, E],
-        [E, E, E, E, P, E, E, E],
-        [E, E, E, E, E, E, E, E],
-        [P, P, P, P, E, P, P, P],
-        [R, N, B, Q, K, B, N, R],
-    ]);
+    let mut chess = Chess::new_game();
+    loop {
+        chess.print_board();
+        println!();
+        println!("Your move: ");
+        let mut chess_move = String::new();
 
-    chess.print_board();
+        io::stdin()
+            .read_line(&mut chess_move)
+            .expect("Failed to read line");
 
-    let _ = chess.move_piece("b8c6");
-
-    chess.print_board();
+        match chess.move_piece(&chess_move.trim()) {
+            Ok(_) => (),
+            Err(err) => println!("Problem parsing move: {err}"),
+        }
+    }
 }
