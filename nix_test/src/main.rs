@@ -3,7 +3,11 @@ use nix::unistd::ForkResult::{Child, Parent};
 use nix::unistd::{fork, getpid, getppid};
 
 fn main() {
-    let pid = fork();
+    let pid;
+
+    unsafe {
+        pid = fork();
+    }
 
     match pid.expect("Fork Failed: Unable to create child process!") {
         Child => println!(
@@ -12,7 +16,7 @@ fn main() {
             getppid()
         ),
         Parent { child } => {
-            wait();
+            let _ = wait();
             println!(
                 "Hello from parent process with pid: {} and child pid:{}",
                 getpid(),

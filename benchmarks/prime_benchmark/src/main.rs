@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-const UPPER_BOUND: usize = 1_000_000;
+const UPPER_BOUND: usize = 1_000_000_000;
 const LOWER_BOUND: usize = 2;
 
 fn main() {
